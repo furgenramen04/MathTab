@@ -3,11 +3,154 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/src/style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>mathtab</title>
+    <title>MathTab</title>
   </head>
   <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
+    <div id="dualtimeclock">
+      
+      <div class="clock" id="clock1">
+        <h3 class="city">Sydney</h3>
+        <p class="time">0400</p>
+        <p class="dst">On</p>
+      </div>
+      
+      <div class="clockdiff" id="clockdiff"></div>
+
+      <div class="clock" id="clock2">
+        <h3 class="city">Dhaka</h3>
+        <p class="time">2300</p>
+        <p class="dst">Off</p> 
+      </div> 
+
+    </div>
+
+    
+    <div class="searchbar">
+      <h1 style="display:flex; color: blanchedalmond; justify-content:center; width:100%;">MathTab</h1>
+      <form style = "color: rgb(48, 134, 48);" action="https://www.google.com/search" method="get">
+        <input style="background-color:brown; color: darkseagreen;" type="text" placeholder = "Search Google.com" name="q">
+        <button style="background-color:aquamarine; color: darkseagreen;" type="submit">Discover</button>
+      </form>
+      
+      <figure id="dailyquote">
+        <blockquote>
+          <svg viewBox="0 0 600 100" width="600">
+            <path id="quotecurve" d="M 20 10 Q 300 90 580 10" fill="none" />
+            <path id="authorcurve" d="M 150 40 Q 300 120 450 40" fill="none" />
+            <text font-size="18">
+              <textPath id="quote" href="#quotecurve" startOffset="50%" text-anchor="middle">
+                The only way to learn mathematics is to do mathematics.
+              </textPath>
+            </text>
+         
+            <text font-size="14">
+              <textPath id="author" href="#authorcurve" startOffset="50%" text-anchor="middle">-Paul Halmos</textPath>
+            </text>
+          </svg> 
+        </blockquote>
+      </figure> 
+  
+    </div>
+    
+  <table class="calendar">
+    <thead>
+      <tr>
+        <th>Sun</th>
+        <th>Mon</th> 
+        <th>Tue</th>
+        <th>Wed</th> 
+        <th>Thu</th>
+        <th>Fri</th>
+        <th>Sat</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+        <td>6</td>
+        <td>7</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>9</td>
+        <td>10</td>
+        <td>11</td>
+        <td>12</td>
+        <td>13</td>
+        <td>14</td>
+      </tr> 
+      <tr>
+        <td>15</td>
+        <td>16</td>
+        <td>17</td>
+        <td>18</td>
+        <td>19</td>
+        <td>20</td>
+        <td>21</td>
+      </tr> 
+      <tr> 
+        <td>22</td>
+        <td>23</td>
+        <td>24</td>
+        <td>25</td>
+        <td>26</td>
+        <td>27</td>
+        <td>28</td>
+      </tr>   
+    </tbody>
+  </table>
+
+  <section id="moon">
+    <h3>Moon Phase</h3>
+    <svg id="moon visual" width="100" height="100" viewBox="0 0 100 100" role="img" aria-label="Current Moon Phase">
+      <circle cx="50" cy="50" r="48" fill="#f4f1de"/>
+    </svg>
+    <p id="moonphase">Waxing Gibbous</p>
+    <p id="moon age">Age: 10 days</p>
+  </section>
+
+ <div class="calculator">
+   <input type="text" readonly id="display"> 
+   <div class="buttons">
+    <button>2nd</button>
+    <button><</button>
+    <button>></button>
+    <button>AC</button>
+    <button>7</button>
+    <button>8</button>
+    <button>9</button>
+    <button>÷</button>
+    <button>4</button>
+    <button>5</button>
+    <button>6</button>
+    <button>×</button>
+    <button>1</button>
+    <button>2</button>
+    <button>3</button>
+    <button>−</button>
+    <button>0</button>
+    <button>.</button>
+    <button>=</button>
+    <button>+</button>
+
+   </div>
+ </div>
+
+ <div class = "grapher">
+   <input type="text" id="equation" placeholder="y=">
+   <canvas id="graph" width="300" height="300" style="border-style:solid; border-color:aqua"></canvas>
+ </div>
+   
+  
+  
+   <script type="module" src="/src/main.js"></script>
+  
+  
   </body>
-</html>
+</html> 

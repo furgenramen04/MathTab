@@ -1,0 +1,64 @@
+.searchbar {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    background-color: #c15921;
+    height:100vh
+}
+
+.calendar {
+    position:fixed;
+    top:50px;
+    right:50px;
+    background-color: #1cbfce;
+}
+
+#moon {
+    position:fixed;
+    top: 150px;
+    right:50px;
+    text-align: center;
+    
+}
+
+.buttons {
+    display:grid;
+    grid-template-columns: repeat(4,1fr);
+    gap:8px
+
+}
+
+.calculator {
+    display:flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 280px;
+    padding: 16px;
+    background-color:navajowhite;
+    border-radius:12px;
+    position:fixed;
+    top:50px;
+    left:50px;
+
+}
+
+.grapher {
+    border-style:solid;
+    border-color:black;
+    border-radius:12px;
+    position:fixed;
+    top:300px;
+    left:40px;
+}
+
+#dailyquote svg {
+    overflow:visible;
+}
+
+#dualtimeclock {
+    position:fixed;
+    top:50px;
+    left:550px;
+
+}
