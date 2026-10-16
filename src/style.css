@@ -1,64 +1,492 @@
+/* ---------- Theme ---------- */
+:root {
+  --text: #eef1ff;
+  --text-dim: rgba(238, 241, 255, 0.65);
+  --glass-bg: rgba(255, 255, 255, 0.07);
+  --glass-border: rgba(255, 255, 255, 0.18);
+  --accent: #8ab4ff;
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, system-ui, sans-serif;
+  color-scheme: dark;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font);
+  color: var(--text);
+  background: #000;
+}
+
+button, input {
+  font: inherit;
+}
+
+/* ---------- The glass look (add class="glass" to any new panel) ---------- */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  border-radius: 22px;
+  padding: 14px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.05),
+    0 8px 32px rgba(0, 0, 0, 0.45);
+}
+
+/* ---------- Side columns ---------- */
+.column {
+  position: fixed;
+  top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  max-height: calc(100vh - 24px);
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.column::-webkit-scrollbar {
+  display: none;
+}
+
+#leftcol {
+  left: 12px;
+}
+
+#rightcol {
+  right: 12px;
+}
+
+/* ---------- Clock ---------- */
+#dualtimeclock {
+  position: fixed;
+  top: 24px;
+  left: 0;
+  right: 0;
+  width: fit-content;
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 12px 26px;
+}
+
+.clock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.city {
+  margin: 0 0 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.clockbodytext {
+  text-align: center;
+}
+
+.time {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.dst {
+  margin: 2px 0 0;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+.clockdiff {
+  max-width: 130px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+/* ---------- Title, search, quote ---------- */
 .searchbar {
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    background-color: #c15921;
-    height:100vh
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.calendar {
-    position:fixed;
-    top:50px;
-    right:50px;
-    background-color: #1cbfce;
+.searchbar h1 {
+  margin: 0 0 18px;
+  font-size: 3.2rem;
+  letter-spacing: -0.02em;
+  color: #a8f0b8;
 }
 
-#moon {
-    position:fixed;
-    top: 150px;
-    right:50px;
-    text-align: center;
-    
+.search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 6px 6px 16px;
+  border-radius: 999px;
 }
 
-.buttons {
-    display:grid;
-    grid-template-columns: repeat(4,1fr);
-    gap:8px
-
+.search input {
+  width: 300px;
+  padding: 8px 4px;
+  background: transparent;
+  color: var(--text);
+  border: none;
+  outline: none;
 }
 
-.calculator {
-    display:flex;
-    flex-direction: column;
-    gap: 8px;
-    width: 280px;
-    padding: 16px;
-    background-color:navajowhite;
-    border-radius:12px;
-    position:fixed;
-    top:50px;
-    left:50px;
-
+.search input::placeholder {
+  color: var(--text-dim);
 }
 
-.grapher {
-    border-style:solid;
-    border-color:black;
-    border-radius:12px;
-    position:fixed;
-    top:300px;
-    left:40px;
+.search:focus-within {
+  border-color: var(--accent);
+}
+
+.search button,
+#addform button {
+  padding: 8px 18px;
+  background: rgba(138, 180, 255, 0.25);
+  color: var(--text);
+  border: 1px solid rgba(138, 180, 255, 0.5);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.search button:hover,
+#addform button:hover {
+  background: rgba(138, 180, 255, 0.4);
+}
+
+#dailyquote {
+  margin: 28px 0 0;
+}
+
+#dailyquote blockquote {
+  margin: 0;
 }
 
 #dailyquote svg {
-    overflow:visible;
+  display: block;
+  overflow: visible;
 }
 
-#dualtimeclock {
-    position:fixed;
-    top:50px;
-    left:550px;
+#dailyquote text {
+  fill: var(--text);
+}
 
+#dailyquote #author {
+  fill: var(--text-dim);
+}
+
+/* ---------- Text inputs ---------- */
+#display,
+.grapher input,
+#addform input {
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.35);
+  color: var(--text);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  outline: none;
+}
+
+#display:focus,
+.grapher input:focus,
+#addform input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(138, 180, 255, 0.25);
+}
+
+/* ---------- Calculator ---------- */
+.calculator {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#display {
+  width: 100%;
+  font-size: 1.1rem;
+  text-align: right;
+}
+
+#display::placeholder {
+  color: var(--text-dim);
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.calculator .buttons button {
+  padding: 6px 0;
+  background: rgba(255, 255, 255, 0.09);
+  color: var(--text);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.calculator .buttons button:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.calculator .buttons button:active {
+  transform: scale(0.95);
+}
+
+.calculator .buttons button.active {
+  background: rgba(138, 180, 255, 0.35);
+  border-color: var(--accent);
+}
+
+/* ---------- Grapher ---------- */
+.grapher {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.grapher input {
+  width: 100%;
+}
+
+#graph {
+  display: block;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 14px;
+}
+
+/* ---------- Calendar ---------- */
+.calendar {
+  padding: 14px 16px;
+}
+
+.cal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.cal-header button {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.09);
+  color: var(--text);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.cal-header button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.calendar table {
+  width: 100%;
+  background: transparent;
+  border-collapse: collapse;
+}
+
+.calendar th {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-dim);
+}
+
+.calendar th,
+.calendar td {
+  padding: 6px 8px;
+  text-align: center;
+}
+
+td.today {
+  background: rgba(138, 180, 255, 0.3);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+/* ---------- Moon ---------- */
+#moon {
+  text-align: center;
+}
+
+#moon h3 {
+  margin: 0 0 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+#moon svg {
+  filter: drop-shadow(0 0 12px rgba(242, 239, 228, 0.25));
+}
+
+#moon p {
+  margin: 6px 0 0;
+}
+
+#moonage {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+/* ---------- Shortcuts ---------- */
+#shortcuts {
+  position: fixed;
+  bottom: 32px;
+  left: 0;
+  right: 0;
+  width: fit-content;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+#addform {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 18px;
+}
+
+#addform[hidden] {
+  display: none;
+}
+
+#addform input {
+  width: 140px;
+}
+
+.links {
+  --size: 48px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  padding: 14px 22px;
+}
+
+.link-item {
+  position: relative;
+}
+
+.link-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.link-btn img,
+.add-icon,
+.link-fallback {
+  width: var(--size);
+  height: var(--size);
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 14px;
+  transition: transform 0.15s, background 0.15s;
+}
+
+.link-btn img {
+  object-fit: contain;
+}
+
+.link-btn:hover img,
+.link-add:hover .add-icon {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-3px);
+}
+
+.link-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: calc(var(--size) * 0.5);
+}
+
+.link-add {
+  padding: 0;
+  background: none;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+.add-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed rgba(255, 255, 255, 0.5);
+  font-size: calc(var(--size) * 0.6);
+  line-height: 1;
+}
+
+.link-remove {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.link-item:hover .link-remove,
+.link-remove:focus-visible {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .link-remove {
+    opacity: 1;
+  }
 }

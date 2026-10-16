@@ -8,32 +8,34 @@
     <title>MathTab</title>
   </head>
   <body>
-    <div id="dualtimeclock">
-      
+
+    <div id="dualtimeclock" class="glass">
       <div class="clock" id="clock1">
         <h3 class="city">Sydney</h3>
-        <p class="time">0400</p>
-        <p class="dst">On</p>
+        <div class="clockbodytext">
+          <p id="sydneytime" class="time">0400</p>
+          <p id="sydneydst" class="dst">On</p>
+        </div>
       </div>
-      
+
       <div class="clockdiff" id="clockdiff"></div>
 
       <div class="clock" id="clock2">
         <h3 class="city">Dhaka</h3>
-        <p class="time">2300</p>
-        <p class="dst">Off</p> 
-      </div> 
-
+        <div class="clockbodytext">
+          <p id="dhakatime" class="time">2300</p>
+          <p id="dhakadst" class="dst">Off</p>
+        </div>
+      </div>
     </div>
 
-    
     <div class="searchbar">
-      <h1 style="display:flex; color: blanchedalmond; justify-content:center; width:100%;">MathTab</h1>
-      <form style = "color: rgb(48, 134, 48);" action="https://www.google.com/search" method="get">
-        <input style="background-color:brown; color: darkseagreen;" type="text" placeholder = "Search Google.com" name="q">
-        <button style="background-color:aquamarine; color: darkseagreen;" type="submit">Discover</button>
+      <h1>MathTab</h1>
+      <form class="search glass" action="https://www.google.com/search" method="get">
+        <input type="text" placeholder="Search Google.com" name="q" aria-label="Search Google">
+        <button type="submit">Discover</button>
       </form>
-      
+
       <figure id="dailyquote">
         <blockquote>
           <svg viewBox="0 0 600 100" width="600">
@@ -44,113 +46,86 @@
                 The only way to learn mathematics is to do mathematics.
               </textPath>
             </text>
-         
             <text font-size="14">
               <textPath id="author" href="#authorcurve" startOffset="50%" text-anchor="middle">-Paul Halmos</textPath>
             </text>
-          </svg> 
+          </svg>
         </blockquote>
-      </figure> 
-  
+      </figure>
     </div>
-    
-  <table class="calendar">
-    <thead>
-      <tr>
-        <th>Sun</th>
-        <th>Mon</th> 
-        <th>Tue</th>
-        <th>Wed</th> 
-        <th>Thu</th>
-        <th>Fri</th>
-        <th>Sat</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>2</td>
-        <td>3</td>
-        <td>4</td>
-        <td>5</td>
-        <td>6</td>
-        <td>7</td>
-      </tr>
-      <tr>
-        <td>8</td>
-        <td>9</td>
-        <td>10</td>
-        <td>11</td>
-        <td>12</td>
-        <td>13</td>
-        <td>14</td>
-      </tr> 
-      <tr>
-        <td>15</td>
-        <td>16</td>
-        <td>17</td>
-        <td>18</td>
-        <td>19</td>
-        <td>20</td>
-        <td>21</td>
-      </tr> 
-      <tr> 
-        <td>22</td>
-        <td>23</td>
-        <td>24</td>
-        <td>25</td>
-        <td>26</td>
-        <td>27</td>
-        <td>28</td>
-      </tr>   
-    </tbody>
-  </table>
 
-  <section id="moon">
-    <h3>Moon Phase</h3>
-    <svg id="moon visual" width="100" height="100" viewBox="0 0 100 100" role="img" aria-label="Current Moon Phase">
-      <circle cx="50" cy="50" r="48" fill="#f4f1de"/>
-    </svg>
-    <p id="moonphase">Waxing Gibbous</p>
-    <p id="moon age">Age: 10 days</p>
-  </section>
+    <nav id="shortcuts">
+      <form id="addform" class="glass" hidden>
+        <input id="newname" placeholder="Name">
+        <input id="newurl" placeholder="example.com">
+        <button type="submit">Add</button>
+      </form>
+      <div class="links glass" id="links"></div>
+    </nav>
 
- <div class="calculator">
-   <input type="text" readonly id="display"> 
-   <div class="buttons">
-    <button>2nd</button>
-    <button><</button>
-    <button>></button>
-    <button>AC</button>
-    <button>7</button>
-    <button>8</button>
-    <button>9</button>
-    <button>÷</button>
-    <button>4</button>
-    <button>5</button>
-    <button>6</button>
-    <button>×</button>
-    <button>1</button>
-    <button>2</button>
-    <button>3</button>
-    <button>−</button>
-    <button>0</button>
-    <button>.</button>
-    <button>=</button>
-    <button>+</button>
+    <aside class="column" id="leftcol">
+      <div class="calculator glass">
+        <input type="text" readonly id="display">
+        <div class="buttons">
+          <button>2nd</button>
+          <button>&lt;</button>
+          <button>&gt;</button>
+          <button>AC</button>
+          <button>SIN</button>
+          <button>COS</button>
+          <button>TAN</button>
+          <button>x^y</button>
+          <button>7</button>
+          <button>8</button>
+          <button>9</button>
+          <button>÷</button>
+          <button>4</button>
+          <button>5</button>
+          <button>6</button>
+          <button>×</button>
+          <button>1</button>
+          <button>2</button>
+          <button>3</button>
+          <button>−</button>
+          <button>0</button>
+          <button>.</button>
+          <button>=</button>
+          <button>+</button>
+        </div>
+      </div>
 
-   </div>
- </div>
+      <div class="grapher glass">
+        <input type="text" id="equation" placeholder="y=">
+        <canvas id="graph" width="300" height="300"></canvas>
+      </div>
+    </aside>
 
- <div class = "grapher">
-   <input type="text" id="equation" placeholder="y=">
-   <canvas id="graph" width="300" height="300" style="border-style:solid; border-color:aqua"></canvas>
- </div>
-   
-  
-  
-   <script type="module" src="/src/main.js"></script>
-  
-  
+    <aside class="column" id="rightcol">
+      <div class="calendar glass">
+        <div class="cal-header">
+          <button id="calprev" aria-label="Previous month">&lt;</button>
+          <span id="calmonth"></span>
+          <button id="calnext" aria-label="Next month">&gt;</button>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr>
+          </thead>
+          <tbody id="calbody"></tbody>
+        </table>
+      </div>
+
+      <section id="moon" class="glass">
+        <h3>Moon Phase</h3>
+        <svg id="moonsvisual" width="100" height="100" viewBox="0 0 100 100" role="img" aria-label="Current Moon Phase">
+          <circle cx="50" cy="50" r="45" fill="#1c1c28"/>
+          <path id="moonlit" fill="#f2efe4"></path>
+        </svg>
+        <p id="moonphase">Waxing Gibbous</p>
+        <p id="moonage">Age: 10 days</p>
+      </section>
+    </aside>
+
+    <script type="module" src="/src/main.js"></script>
   </body>
-</html> 
+</html>
