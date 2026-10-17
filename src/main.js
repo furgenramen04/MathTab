@@ -152,7 +152,7 @@ function makeFunction(text) {
 }
 
 function plot(f) {
-  ctx.strokeStyle = "#3c76e3";
+  ctx.strokeStyle = "#a8f0b8";
   ctx.lineWidth = 2;
   ctx.beginPath();
 
