@@ -197,13 +197,18 @@ const buttons = document.querySelector(".calculator .buttons")
 
 let justEvaluated = false;
 let shiftmode = false;
+let lastAnswer = "";
 
 const OPERATORS = ["+", "−", "×", "÷", "^"];
 const SWAP = {
   "SIN": "SIN^-1", "SIN^-1": "SIN",
   "COS": "COS^-1", "COS^-1": "COS",
-  "TAN": "TAN^-1", "TAN^-1":"TAN",
+  "TAN": "TAN^-1", "TAN^-1": "TAN",
+  "8": "(", "(": "8",
+  "9": ")", ")": "9",
+  "x^y": "√", "√": "x^y",
 };
+
 const FUNC_NAME = {
   "SIN": "sin", "SIN^-1": "asin",
   "COS": "cos", "COS^-1": "acos",
@@ -223,10 +228,11 @@ function handle(label, btn) {
       display.value = "";
       justEvaluated = false;
       break;
-    case "<":
+    case "DEL":
       backspace();
       break;
-    case ">":
+    case "ANS":
+      pressAnswer();
       break;
     case "2nd":
       toggleSecond(btn);
@@ -237,13 +243,34 @@ function handle(label, btn) {
     case "+": case "−": case "×": case "÷":
       pressOperator(label);
       break;
-    case "x^y":
+  case "x^y":
       pressOperator("^");
       break;
+    case "(":
+      pressFunction("");
+      break;
+    case ")":
+      pressCloseBracket();
+      break;
+    case "√":
+      pressFunction("√");
+      break;
     default:
-      if (label in SWAP) pressFunction(FUNC_NAME[label]);
+      if (label in FUNC_NAME) pressFunction(FUNC_NAME[label]);
       else pressInput(label);
   }
+}
+
+function pressCloseBracket() {
+  const value = display.value;
+  const open = (value.match(/\(/g) || []).length;
+  const close = (value.match(/\)/g) || []).length;
+  const last = value.slice(-1);
+
+  if (open <= close) return;
+  if (value === "" || last === "(" || OPERATORS.includes(last)) return;
+
+  display.value += ")";
 }
 
 function pressInput(ch) {
@@ -251,6 +278,7 @@ function pressInput(ch) {
     display.value = "";
     justEvaluated = false;
   }
+  if (display.value.slice(-1) === ")") display.value += "×";
   if (ch === ".") {
     const currentNumber = display.value.split(/[+−×÷^(]/).pop();
     if (currentNumber.includes(".")) return;
@@ -290,8 +318,9 @@ function pressFunction(name) {
 }
 
 function backspace() {
-  display.value = display.value.replace(/(?:a?(?:sin|cos|tan)\(|.)$/, "");
+  display.value = display.value.replace(/(?:a?(?:sin|cos|tan)\(|√\(|.)$/, "");
 }
+
 
 function toggleSecond(btn) {
   shiftmode = !shiftmode;
@@ -314,7 +343,8 @@ function evaluate() {
     .replace(/×/g, "*")
     .replace(/÷/g, "/")
     .replace(/−/g, "-")
-    .replace(/\^/g, "**");
+    .replace(/\^/g, "**")
+    .replace(/√/g, "sqrt");
 
   try {
     const result = new Function(`
@@ -326,11 +356,13 @@ function evaluate() {
       const asin = (x) => deg(Math.asin(x));
       const acos = (x) => deg(Math.acos(x));
       const atan = (x) => deg(Math.atan(x));
+      const sqrt = Math.sqrt;
       return ${expr};
     `)();
 
     if (!Number.isFinite(result)) throw new Error("bad result");
     display.value = String(parseFloat(result.toFixed(10))).replace("-", "−");
+    lastAnswer = display.value;
   } catch {
     display.value = "Error";
   }
@@ -356,9 +388,11 @@ document.addEventListener("click", (event) => {
 const KEY_MAP = {
   "+": "+", "-": "−", "*": "×", "x": "×", "/": "÷", "^": "x^y",
   "Enter": "=", "=": "=",
-  "Backspace": "<",
+  "Backspace": "DEL",
   "Escape": "AC", "Delete": "AC",
   "s": "SIN", "c": "COS", "t": "TAN",
+  "(": "(", ")": ")", "r": "√",
+  "a":"ANS",
 };
 
 function findButton(label) {
@@ -367,6 +401,16 @@ function findButton(label) {
   
   );
   
+}
+
+function pressAnswer() {
+  if (lastAnswer === "") return;
+  if (justEvaluated) {
+    display.value = "";
+    justEvaluated = false;
+  }
+  if (/[\d.)]$/.test(display.value)) display.value += "×";
+  display.value += lastAnswer;
 }
 
 document.addEventListener("keydown", (event) => {
